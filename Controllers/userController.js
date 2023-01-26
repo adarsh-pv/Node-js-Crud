@@ -6,10 +6,18 @@ import  Jwt from 'jsonwebtoken'
 
 export const getHome=async(req,res)=>{
   const {userId} = req.body
-  const allusers = await userModel.find({_id:{$nin:[userId]}})
+  const item_per_page =2
+  const page = parseInt(req.query.page) || 1
+  console.log(page)
+  const skip = (page- 1) * item_per_page
+  const allDocs = await userModel.countDocuments()
+  const hasnextPage = (allDocs> (page*item_per_page))
+  const hasPreviousPage = (page >=2)
+  const next = page +1
+const prev = page -1
+  const allusers = await userModel.find({_id:{$nin:[userId]}}).skip(skip).limit(item_per_page)
     const users = await userModel.findOne({_id:userId})
-    console.log(users,"jkj")
-      res.render('home',{users,allusers})
+      res.render('home',{users,allusers,page,hasnextPage,hasPreviousPage,page,prev,next})
     }
 export const DeleteUser = async(req,res)=>{
 const {userid} = req.params

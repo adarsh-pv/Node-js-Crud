@@ -55,6 +55,7 @@
       </div>
 </form> 
     </div>
+    
   </div>
 </div>
 
@@ -63,7 +64,19 @@
   {{/each}}
 </table>
 
-
+ <ul class="pagination flex center">
+    {{#if hasPreviousPage}}
+    <li class="page-item ">
+      <a href="/?page={{prev}}" class="page-link">prev</a>
+    </li>
+    {{/if}}
+    <li class="page-item"><a class="page-link" >{{page}}</a></li>
+  {{#if hasnextPage}}
+ <li class="page-item">
+      <a class="page-link" href="/?page={{next}}">Next</a>
+    </li>
+    {{/if}}
+  </ul>
 </container>
 <script>
     const deleteUser = async (id)=>{
