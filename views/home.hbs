@@ -3,6 +3,7 @@
     
 
       <th scope="col"><b><i>🫠 welcome  {{users.name}}</i></b></th>
+<button type="button" class="btn btn-danger" onclick="logout()"   style="margin-left: 90%;">LogOut</button>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -22,9 +23,43 @@
       <td>{{this.name}}</td>
       <td>{{this.email}}</td>
       <td>{{this.number}}</td>
-      <td scope="col"><button type="button" class="btn btn-danger" onclick="editUser('{{this._id}}')" >Edit</button></td>
-      <td scope="col"><button type="button" class="btn btn-danger"onclick="deleteUser('{{this._id}}')">Delete</button></td>
+      <td scope="col"><button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editUser('{{this._id}}')" >Edit</button></td>
+      <td scope="col"><button type="button" class="btn btn-danger" onclick="deleteUser('{{this._id}}')">Delete</button></td>
     </tr>
+    {{!--  --}}
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+<form action="/edit" method="post">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input type="text" name="name" class="form-control" value={{this.name}} id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input type="hidden" required value={{this._id}} name="id">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">phone</label>
+    <input type="tel" required name="number" value={{this.number}} class="form-control" id="exampleInputPassword1">
+  </div>
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+</form> 
+    </div>
+  </div>
+</div>
+
+
   </tbody>
   {{/each}}
 </table>
@@ -34,9 +69,13 @@
 <script>
     const deleteUser = async (id)=>{
         const response =await fetch(`/delete/${id}`)
+        location.reload()
     }
-    const editUser = async (id) =>{
-        const response = await fetch(`/edit/${id}`)
+    const logout = () =>{
+        //const cookie = document.cookie.replace('token=',"")
+ document.cookie = "token =''"
+ location.reload()
     }
+ 
 
 </script>

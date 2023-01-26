@@ -19,8 +19,16 @@ console.log(response,"dd")
 res.redirect('/')
 
 }
+export const PostUser =async (req,res)=>{
+   const {id,name,number} = req.body
+    const response = await userModel.findByIdAndUpdate(id,{name,number})
+    res.redirect('/')
+}
 export const editUser = async (req,res)=>{
-    const {userid} = req.params
+    const {id} = req.params
+console.log(req.params)
+    const User = await userModel.findById(id)
+    res.render('edit',{User})
   
 }
 export const getRegister = (req,res)=>{
@@ -34,6 +42,8 @@ export const getLogin = (req,res) =>{
 export const postLogin =async (req,res)=>{
     const {email,password} = req.body
     const user = await userModel.findOne({email:email})
+    if(!user) return res.render('login',{err:'user not exist'})
+    
     const payload = {
         userId:user._id,
         username:user.name
@@ -43,7 +53,7 @@ export const postLogin =async (req,res)=>{
         const token = Jwt.sign(payload,process.env.secret,{expiresIn:'1h'})
         console.log(token)
         if(response) return res.cookie('token',token).redirect('/')
-        res.send(401)
+        res.render('login',{err:'password-wrong'})
     }
 }
  export const hashPassword =async (password)=>{

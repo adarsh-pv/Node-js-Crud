@@ -4,52 +4,52 @@
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div class="card bg-dark text-white" style="border-radius: 1rem;">
           <div class="card-body p-5 text-center">
-            <form action="/signup" method="post">
+            <form id="signup" action="/signup" method="post">
             <div class="mb-md-5 mt-md-4 pb-5">
-
+   
               <h2 class="fw-bold mb-2 text-uppercase">Signup</h2>
               <p class="text-white-50 mb-5">Signup now</p>
 
               <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typeEmailX">Name</label>
                 <input
                   type="text"
                   name="name"
                   class="form-control form-control-lg"
                 />
-                <label class="form-label" for="typeEmailX">Name</label>
               </div>
               <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typeEmailX">Email</label>
                 <input
                   type="email"
                   name="email"
                   class="form-control form-control-lg"
                 />
-                <label class="form-label" for="typeEmailX">Email</label>
               </div>
                <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typeEmailX">Phone Number</label>
                 <input
                   type="text"
                   name="number"
                   class="form-control form-control-lg"
                 />
-                <label class="form-label" for="typeEmailX">Phone Number</label>
               </div>
 
               <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typePasswordX">Password</label>
                 <input
                   type="password"
                   name="password"
                   class="form-control form-control-lg"
                 />
-                <label class="form-label" for="typePasswordX">Password</label>
               </div>
                 <div class="form-outline form-white mb-4">
+                <label class="form-label" for="typePasswordX">Confirm Password</label>
                 <input
                   type="password"
-                  name="conpssword"
+                  name="conPassword"
                   class="form-control form-control-lg"
                 />
-                <label class="form-label" for="typePasswordX">Confirm Password</label>
               </div>
 
               <button
@@ -73,3 +73,66 @@
     </div>
   </div>
 </section>
+       <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+{{!-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script> --}}
+
+<script>
+    $(document).ready (function () {  
+  $("#signup").validate({
+        rules:{
+      name:{
+        required:true,
+        minlength:3,
+       lettersonly:true
+       
+      },
+      email:{
+        required:true,
+        email:true
+
+      },
+      number:{
+      required:true,
+      minlength:10
+      },
+      password:{
+        required:true,
+        minlength:5
+      },
+      conPassword:{
+        required:true,
+        minlength:5,
+        equalTo:"#password"
+      }
+    },
+    
+    messages:{
+      name:{
+        required:"Please enter your name",
+        minlength:"Atleast 5 letters",
+        lettersonly:"Only Letters"
+      },
+      email:{
+        required:"Please enter your email ID",
+        email:"Enter a valid Email ID"
+        },
+      number:{
+        required:"Enter your mobile number",
+        minlength:"Minimum 10 charactor in password",
+ 
+      },
+      password:{
+      required:"Please enter your password",
+      minlength:"Minimum 5 charactors in password"
+    },
+    conPassword:{
+      required:"Confirm your password",
+      minlength:"Minimum 5 charactor in password",
+      equalTo:"Enter the same password"
+    },
+    
+    }
+  
+  });  
+});  
+</script>
