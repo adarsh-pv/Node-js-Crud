@@ -1,0 +1,42 @@
+
+<container>
+    
+
+      <th scope="col"><b><i>🫠 welcome  {{users.name}}</i></b></th>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Number</th>
+
+
+
+    </tr>
+  </thead>
+   {{#each allusers}}
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>{{this.name}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.number}}</td>
+      <td scope="col"><button type="button" class="btn btn-danger" onclick="editUser('{{this._id}}')" >Edit</button></td>
+      <td scope="col"><button type="button" class="btn btn-danger"onclick="deleteUser('{{this._id}}')">Delete</button></td>
+    </tr>
+  </tbody>
+  {{/each}}
+</table>
+
+
+</container>
+<script>
+    const deleteUser = async (id)=>{
+        const response =await fetch(`/delete/${id}`)
+    }
+    const editUser = async (id) =>{
+        const response = await fetch(`/edit/${id}`)
+    }
+
+</script>
