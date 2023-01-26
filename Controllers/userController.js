@@ -65,6 +65,7 @@ export const postLogin =async (req,res)=>{
 export const postSignup =async (req,res)=>{
     const  { name,email,number,password,conpassword } =  req.body
     const hashed = await hashPassword(password)
+
   const User = new userModel({
     name,
     email,
@@ -72,4 +73,5 @@ export const postSignup =async (req,res)=>{
     password:hashed
   })
   User.save()
+  res.redirect('/login')
 }

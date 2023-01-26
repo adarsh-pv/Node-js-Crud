@@ -19,18 +19,17 @@
    {{#each allusers}}
   <tbody>
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{@index}}</th>
       <td>{{this.name}}</td>
       <td>{{this.email}}</td>
       <td>{{this.number}}</td>
-      <td scope="col"><button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="editUser('{{this._id}}')" >Edit</button></td>
+      <td scope="col"><button type="button" class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#{{this.name}}"  >Edit</button></td>
       <td scope="col"><button type="button" class="btn btn-danger" onclick="deleteUser('{{this._id}}')">Delete</button></td>
     </tr>
     {{!--  --}}
-<!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{this.name}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
 <form action="/edit" method="post">
